@@ -1,0 +1,191 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
+
+
+body {
+    margin: 0px;
+    padding: 0px;
+    overflow-y: hidden;
+    font-family: 'Raleway', sans-serif;
+}
+
+.index-header {
+    width: 100%;
+    height: 60px;
+    background-color: green;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo {
+    height: 35px;
+    width: auto;
+    margin-right: 7px;
+    margin-left: 30px;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    color: whitesmoke;
+    font-size: 25px
+}
+
+.link {
+    color: whitesmoke;
+    font-size: 25px;
+    text-decoration: none;
+    margin-right: 30px;
+}
+
+.section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background-image: url(./Images/ocean.jpg);
+    background-size: cover
+}
+
+.form {
+    padding: 10px;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 600px;
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    z-index: 3;
+    height: 700px;
+    box-shadow: 0px 0px 20px 20px rgba(0,0,0,0.6);
+    border-radius: 20px;
+}
+
+.black-wrapper {
+    width: 80%;
+    background-image: url(./Images/ocean2.jpg);
+    background-size: cover;
+    filter: blur(5px);
+    display: flex;
+    z-index: 1;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.4);
+    margin-bottom: 80px;
+}
+
+.black-wrapper-black {
+    width: 80%;
+    background: rgba(0,0,0,0.3);
+    position: absolute;
+    display: flex;
+    z-index: 2;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.4);
+    margin-bottom: 80px;
+}
+
+.block {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    margin-top: 50px;
+    flex-direction: column;
+    width: 500px;
+}
+
+.label-name {
+    font-size: 20px;
+    margin-bottom: 7px;
+    color: white;
+}
+
+.text-box {
+    width: 500px;
+    height: 45px;
+    font-size: 20px;
+    border: none;
+    outline: none;
+}
+
+.button-submit {
+    width: 510px;
+    background-color: green;
+    color: white;
+    font-size: 25px;
+    height: 50px;
+    border: none;
+    margin-top: 50px;
+}
+
+    .button-submit:hover {
+        opacity: 0.7;
+        transition: 285ms;
+    }
+
+.headline {
+    color: white;
+    font-size: 40px
+}
+
+.check {
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.check-gender {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checbox {
+    transform: scale(1.5);
+    margin-right: 10px;
+}
+
+.txt-check {
+    color: white;
+    font-size: 20px;
+}
+
+.error-label {
+    color: red;
+    margin-top: 20px;
+}
+
+.logout{
+    border:none;
+    outline:none;
+    background-color:transparent;
+}
+.profile{
+    width:auto;
+    height:300px;
+    background-color:red;
+    margin-left:auto;
+    margin-right:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.profile-image{
+    height:300px;
+    width:300px;
+    border-radius:50%
+}
+.username-logged{
+    font-size:70px;
+}

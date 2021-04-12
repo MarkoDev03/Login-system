@@ -19,19 +19,20 @@ namespace LoginSystemASP.NET
             DataProvider dataProvider = new DataProvider();
 
             string gender = "";
+
             if (chcFemale.Checked == true)
             {
-                chcMale.Checked = false;
+                chcMale.Enabled = false;
                 gender = "F";
             }
             else if (chcMale.Checked == true)
             {
-                chcFemale.Checked = false;
+                chcFemale.Enabled = false;
                 gender = "M";
             }
             if (dataProvider.DoesThisAccountExists(txtUsername.Text) == 0)
             {
-               dataProvider.CreateAccount(txtUsername.Text, txtPassword.Text, txtBiography.Text, gender);
+                dataProvider.CreateAccount(txtUsername.Text, txtPassword.Text, txtBiography.Text, gender);
             }
             else
             {
@@ -39,13 +40,8 @@ namespace LoginSystemASP.NET
             }
             if (txtPassword.Text != "" && txtUsername.Text != "" && txtPassword.Text != null && txtUsername.Text != null)
             {
-                if (txtPassword.Text.Length < 6)
+                if (txtPassword.Text.Length > 6)
                 {
-                    lblProgress.Text = "Password must be longer then 6 charcaters!";
-                }
-                else
-                {
-
                     if (dataProvider.CreatingProgress == 1)
                     {
                         User user = new User
@@ -66,13 +62,15 @@ namespace LoginSystemASP.NET
                         //lblProgress.Text = dataProvider.ErrorMessage;
                     }
                 }
+                else
+                {
+                    lblProgress.Text = "Password must be longer then 6 charcaters!";
+                }
             }
             else
             {
                 lblProgress.Text = "Enter username and password!";
             }
-
-
         }
     }
 }

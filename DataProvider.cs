@@ -27,18 +27,20 @@ namespace LoginSystemASP.NET
 
                     using (SqlCommand sqlCommand = new SqlCommand())
                     {
-                        sqlCommand.CommandText = "INSERT INTO ACCOUNTS_ (USERNAME, PASSWORD, BIOGRAPHY, GENDER) VALUES(@USERNAME, @PASSWORD, @BIOGRAPHY, @GENDER)";
+                        sqlCommand.CommandText = "INSERT INTO ACCOUNTS_ (USERNAME, PASSWORD, BIOGRAPHY, GENDER, USER_ID) VALUES(@USERNAME, @PASSWORD, @BIOGRAPHY, @GENDER, @USER_ID)";
 
                         sqlCommand.Parameters.Add("@USERNAME", System.Data.SqlDbType.NVarChar);
                         sqlCommand.Parameters.Add("@PASSWORD", System.Data.SqlDbType.NVarChar);
                         sqlCommand.Parameters.Add("@BIOGRAPHY", System.Data.SqlDbType.NVarChar);
                         sqlCommand.Parameters.Add("@GENDER", System.Data.SqlDbType.Char);
+                        sqlCommand.Parameters.Add("@USER_ID",System.Data.SqlDbType.NVarChar);
 
 
                         sqlCommand.Parameters["@USERNAME"].Value = username;
                         sqlCommand.Parameters["@PASSWORD"].Value = password;
                         sqlCommand.Parameters["@BIOGRAPHY"].Value = biography;
                         sqlCommand.Parameters["@GENDER"].Value = gender;
+                        sqlCommand.Parameters["@USER_ID"].Value = "id_"+username;
 
                         sqlCommand.Connection = sqlConnection;
 
@@ -106,10 +108,8 @@ namespace LoginSystemASP.NET
                             LoginProgress = 0;
                             return null;
                         }
-
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -139,6 +139,11 @@ namespace LoginSystemASP.NET
                     return 0;
                 }
             }
+        }
+
+        public void SetProfileImage(string source)
+        {
+
         }
     }
 }

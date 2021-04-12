@@ -75,7 +75,7 @@
     <Content Include="Index.aspx" />
     <Content Include="JavaScript.js" />
     <Content Include="Login.aspx" />
-    <Content Include="style.css" />
+    <Content Include="style-main.css" />
     <Content Include="User.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
