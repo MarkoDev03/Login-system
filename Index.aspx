@@ -48,8 +48,7 @@
                             <asp:Label ID="Label5" runat="server" Text="Female" CssClass="txt-check"></asp:Label>
                         </div>
                     </div>
-
-                    <asp:Button ID="btnCreateAccount" runat="server" OnClick="btnCreateAccount_Click" Text="Create" CssClass="button-submit" />
+                   <asp:Button ID="btnCreateAccount" runat="server" OnClick="btnCreateAccount_Click" Text="Create" CssClass="button-submit" />
                     <asp:Label ID="lblProgress" runat="server" Text="" CssClass="error-label"></asp:Label>
                 </div>
             </section>

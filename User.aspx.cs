@@ -19,7 +19,23 @@ namespace LoginSystemASP.NET
 
             lblBiography.Text = user.Biography;
             lblUsername.Text = user.Username;
-          
+
+            using (SqlConnection sqlConnection = new SqlConnection())
+            {
+                sqlConnection.ConnectionString = "Data Source=DESKTOP-DV7E1D5\\SQLEXPRESS;Initial Catalog=DataBaseSystem;Integrated Security=True";
+
+                using (SqlCommand sqlCommand = new SqlCommand())
+                {
+                    sqlCommand.CommandText = "SELECT IMAGE FROM ACCOUNTS_ WHERE USERNAME='" + user.Username + "|'";
+                    sqlCommand.Connection = sqlConnection;
+                    sqlConnection.Open();
+                    byte[] bytes = (byte[])sqlCommand.ExecuteScalar();
+                    string basex = Convert.ToBase64String(bytes);
+                    Image1.ImageUrl = "data:Image/png;base64," + basex;
+
+                }
+            }
+
         }
 
         protected void logOut_Click(object sender, EventArgs e)
@@ -30,7 +46,7 @@ namespace LoginSystemASP.NET
 
         protected void btnOpenImage_Click(object sender, EventArgs e)
         {
-            HttpPostedFile postedFile = FileUpload1.PostedFile;
+           HttpPostedFile postedFile = FileUpload1.PostedFile;
             string fileName = Path.GetFileName(postedFile.FileName);
             string fileExtension = Path.GetExtension(postedFile.FileName);
             int fileSize = postedFile.ContentLength;
@@ -87,6 +103,7 @@ namespace LoginSystemASP.NET
 
         protected void btnSaveImage_Click(object sender, EventArgs e)
         {
+
             User user = Session["user"] as User;
             using (SqlConnection sqlConnection = new SqlConnection())
             {
@@ -94,7 +111,7 @@ namespace LoginSystemASP.NET
 
                 using (SqlCommand sqlCommand = new SqlCommand())
                 {
-                    sqlCommand.CommandText = "SELECT IMAGE FROM ACCOUNTS_ WHERE USERNAME='perovicmarko|'";
+                    sqlCommand.CommandText = "SELECT IMAGE FROM ACCOUNTS_ WHERE USERNAME='"+user.Username+"|'";
                     sqlCommand.Connection = sqlConnection;
                     sqlConnection.Open();
                     byte[] bytes = (byte[])sqlCommand.ExecuteScalar();
@@ -105,6 +122,7 @@ namespace LoginSystemASP.NET
 
 
             }
+
         }
     }
 }
