@@ -73,10 +73,11 @@
     <Content Include="Images\ocean.jpg" />
     <Content Include="Images\ocean2.jpg" />
     <Content Include="Index.aspx" />
-    <Content Include="JavaScript.js" />
+    <Content Include="JavaScript1.js" />
     <Content Include="Login.aspx" />
-    <Content Include="style.css" />
+    <Content Include="style1.css" />
     <Content Include="User.aspx" />
+    <Content Include="UserJS.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

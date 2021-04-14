@@ -72,12 +72,10 @@ namespace LoginSystemASP.NET
 
                         sqlCommand.CommandText = "INSERT INTO PROFILEIMAGE (USERNAME, USER_ID, PROFILE_IMAGE) VALUES(@USERNAME, @USER_ID, @PROFILE_IMAGE)";
 
-
                             sqlCommand.Parameters.AddWithValue("@USERNAME", user.Username);
                             sqlCommand.Parameters.AddWithValue("@USER_ID", "id_" + user.Username);
                             sqlCommand.Parameters.Add("@PROFILE_IMAGE", System.Data.SqlDbType.VarBinary);                         
                             sqlCommand.Parameters["@PROFILE_IMAGE"].Value = bytes;
-
 
                         sqlCommand.ExecuteNonQuery();
                         sqlConnection.Close();

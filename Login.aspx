@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Log in</title>
-    <link href="style.css" rel="stylesheet" />
+    <link href="style1.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server" autocomplete="off">
@@ -42,5 +42,5 @@
         </div>
     </form>
 </body>
-<script src="JavaScript.js"></script>
+<script src="JavaScript1.js"></script>
 </html>
