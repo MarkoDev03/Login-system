@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Log in</title>
-    <link href="style-main.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server" autocomplete="off">
@@ -24,7 +24,7 @@
                 <div class="black-wrapper" id="wrapper-img"></div>
                 <div class="black-wrapper-black" id="wrapper-img-2"></div>
                 <div class="form">
-                    <h1 class="headline">Create account</h1>
+                    <h1 class="headline">Log in</h1>
                     <div class="block">
                         <asp:Label ID="Label1" runat="server" Text="Username" CssClass="label-name"></asp:Label>
                         <asp:TextBox ID="txtUsername" runat="server" CssClass="text-box"></asp:TextBox>
@@ -35,7 +35,7 @@
                     </div>
 
 
-                    <asp:Button ID="Button1" runat="server" OnClick="btnCreateAccount_Click" Text="Create" CssClass="button-submit" />
+                    <asp:Button ID="Button1" runat="server" OnClick="btnCreateAccount_Click" Text="Log in" CssClass="button-submit" />
                     <asp:Label ID="lblProgress" runat="server" Text="" CssClass="error-label"></asp:Label>
                 </div>
             </section>
