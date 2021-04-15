@@ -7,12 +7,13 @@ using System.Web.UI.WebControls;
 using System.IO;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Net.Mail;
+using System.Net;
 
 namespace LoginSystemASP.NET
 {
     public partial class User1 : System.Web.UI.Page
     {
-
         protected void Page_Load(object sender, EventArgs e)
         {
             User user = Session["user"] as User;
@@ -29,15 +30,21 @@ namespace LoginSystemASP.NET
                     sqlCommand.CommandText = "SELECT PROFILE_IMAGE FROM PROFILEIMAGE WHERE USERNAME='" + user.Username + "'";
                     sqlCommand.Connection = sqlConnection;
                     sqlCommand.ExecuteNonQuery();
+
                     if ((byte[])sqlCommand.ExecuteScalar() != null)
                     {
                         byte[] bytes = (byte[])sqlCommand.ExecuteScalar();
                         string basex = Convert.ToBase64String(bytes);
                         Image1.ImageUrl = "data:Image/png;base64," + basex;
+                        btnOpenImage.Text = "Update";
+                    }
+                    else
+                    {
+     
+                        btnOpenImage.Text = "Post";
                     }
                 }
             }
-
         }
 
         protected void logOut_Click(object sender, EventArgs e)
@@ -51,7 +58,8 @@ namespace LoginSystemASP.NET
            HttpPostedFile postedFile = FileUpload1.PostedFile;
             string fileName = Path.GetFileName(postedFile.FileName);
             string fileExtension = Path.GetExtension(postedFile.FileName);
-            int fileSize = postedFile.ContentLength;
+            double fileSize = postedFile.ContentLength;
+            DateTime dateTime = DateTime.Now;
 
             if (fileExtension.ToLower() == ".jpg" || fileExtension.ToLower() == ".jpeg" || fileExtension.ToLower() == ".png" || fileExtension.ToLower() == ".bmp" || fileExtension.ToLower() == ".gif")
             {
@@ -60,28 +68,24 @@ namespace LoginSystemASP.NET
 
                 byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
 
-                using (SqlConnection sqlConnection = new SqlConnection())
+                DataProvider dataProvider = new DataProvider();
+                User user = Session["user"] as User;
+
+                SqlConnection sqlConnection = new SqlConnection("Data Source=DESKTOP-DV7E1D5\\SQLEXPRESS;Initial Catalog=DataBaseSystem;Integrated Security=True");
+                SqlCommand sqlCommand2 = new SqlCommand("SELECT PROFILE_IMAGE FROM PROFILEIMAGE WHERE USERNAME='" + user.Username + "'", sqlConnection);
+                sqlConnection.Open();
+
+                if ((byte[])sqlCommand2.ExecuteScalar() == null) 
                 {
-                    sqlConnection.ConnectionString = "Data Source=DESKTOP-DV7E1D5\\SQLEXPRESS;Initial Catalog=DataBaseSystem;Integrated Security=True";
-
-
-                    using (SqlCommand sqlCommand = new SqlCommand())
-                    {
-                        sqlCommand.Connection = sqlConnection; sqlConnection.Open();
-                        User user = Session["user"] as User;
-
-                        sqlCommand.CommandText = "INSERT INTO PROFILEIMAGE (USERNAME, USER_ID, PROFILE_IMAGE) VALUES(@USERNAME, @USER_ID, @PROFILE_IMAGE)";
-
-                            sqlCommand.Parameters.AddWithValue("@USERNAME", user.Username);
-                            sqlCommand.Parameters.AddWithValue("@USER_ID", "id_" + user.Username);
-                            sqlCommand.Parameters.Add("@PROFILE_IMAGE", System.Data.SqlDbType.VarBinary);                         
-                            sqlCommand.Parameters["@PROFILE_IMAGE"].Value = bytes;
-
-                        sqlCommand.ExecuteNonQuery();
-                        sqlConnection.Close();
-                        Response.Redirect("User.aspx");
-                    }
+                dataProvider.SetProfileImage(bytes, user, fileSize, fileName, fileExtension, dateTime);
                 }
+                else
+                {
+                    dataProvider.UpdateProfileImage(bytes, user, fileSize, fileName, fileExtension, dateTime);
+                }
+              
+                Response.Redirect("User.aspx");
+
             }
             else
             {

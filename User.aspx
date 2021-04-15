@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>User</title>
-    <link href="style1.css" rel="stylesheet" />
+    <link href="style3.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -16,12 +16,12 @@
                     <p>Marko Perović</p>
                 </div>
                 <div>
-                    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Index.aspx" CssClass="link">Home</asp:HyperLink>
                     <asp:Button ID="logOut" runat="server" Text="Log out" OnClick="logOut_Click" CssClass="link logout" />
                 </div>
             </header>
             <section class="user-section" id="user-sectio-x">
-            </section><div class="profile-picture-options">
+            </section>
+            <div class="profile-picture-options">
                 <div class="profile">
                     <asp:Image ID="Image1" runat="server" CssClass="profile-image" />
                     <asp:Label ID="lblUsername" runat="server" Text="" CssClass="username-logged"></asp:Label>
@@ -29,16 +29,15 @@
 
                 <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
 
-                
-                    <asp:Label ID="lblBiography" runat="server" Text=""  CssClass="user-biography"></asp:Label>
-                    <asp:Button ID="btnOpenImage" runat="server" Text="Post" OnClick="btnOpenImage_Click" CssClass="button-option" />
-                    <asp:Button ID="btnLoadImage" runat="server" Text="Load" CssClass="button-option" />
 
-                    <label class="button-option label-style">
-                        <asp:FileUpload ID="FileUpload1" runat="server" Text="Upload" CssClass="upload-file" />
-                        <asp:Label ID="Label2" runat="server" Text="Chose image" CssClass="upload-text"></asp:Label>
-                    </label>
-                </div>
+                <asp:Label ID="lblBiography" runat="server" Text="" CssClass="user-biography"></asp:Label>
+                <asp:Button ID="btnOpenImage" runat="server" Text="Post" OnClick="btnOpenImage_Click" CssClass="button-option" />
+
+                <label class="button-option label-style">
+                    <asp:FileUpload ID="FileUpload1" runat="server" Text="Upload" CssClass="upload-file" />
+                    <asp:Label ID="Label2" runat="server" Text="Chose image" CssClass="upload-text"></asp:Label>
+                </label>
+            </div>
         </div>
     </form>
 </body>

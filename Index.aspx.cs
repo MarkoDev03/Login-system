@@ -30,7 +30,7 @@ namespace LoginSystemASP.NET
                 chcFemale.Enabled = false;
                 gender = "M";
             }
-            if (dataProvider.DoesThisAccountExists(txtUsername.Text) == 0)
+            if (dataProvider.DoesThisAccountExists(txtUsername.Text) == 0 && txtPassword.Text.Length > 6)
             {
                 dataProvider.CreateAccount(txtUsername.Text, txtPassword.Text, txtBiography.Text, gender);
             }
