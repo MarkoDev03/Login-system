@@ -141,26 +141,23 @@ namespace LoginSystemASP.NET
             }
         }
 
-        public void SetProfileImage(byte[] bytes, User user, double size, string name, string type, DateTime time)
+        public void SetProfileImage(byte[] bytes, User user)
         {
             using (SqlConnection sqlConnection = new SqlConnection())
             {
                 sqlConnection.ConnectionString = "Data Source=DESKTOP-DV7E1D5\\SQLEXPRESS;Initial Catalog=DataBaseSystem;Integrated Security=True";
+
 
                 using (SqlCommand sqlCommand = new SqlCommand())
                 {
                     sqlCommand.Connection = sqlConnection; sqlConnection.Open();
 
-                    sqlCommand.CommandText = "INSERT INTO PROFILEIMAGE (USERNAME, USER_ID, PROFILE_IMAGE, IMAGE_SIZE, IMAGE_NAME, IMAGE_TYPE, TIME_POSTED) VALUES(@USERNAME, @USER_ID, @PROFILE_IMAGE, @IMAGE_SIZE, @IMAGE_NAME, @IMAGE_TYPE, @TIME_POSTED)";
+                    sqlCommand.CommandText = "INSERT INTO PROFILEIMAGE (USERNAME, USER_ID, PROFILE_IMAGE) VALUES(@USERNAME, @USER_ID, @PROFILE_IMAGE)";
 
                     sqlCommand.Parameters.AddWithValue("@USERNAME", user.Username);
                     sqlCommand.Parameters.AddWithValue("@USER_ID", "id_" + user.Username);
                     sqlCommand.Parameters.Add("@PROFILE_IMAGE", System.Data.SqlDbType.VarBinary);
-                    sqlCommand.Parameters.AddWithValue("@IMAGE_SIZE", Math.Round(size / 1000000, 2).ToString() + " MB");
-                    sqlCommand.Parameters.AddWithValue("@IMAGE_NAME", name);
-                    sqlCommand.Parameters.AddWithValue("@IMAGE_TYPE", type);
                     sqlCommand.Parameters["@PROFILE_IMAGE"].Value = bytes;
-                    sqlCommand.Parameters.AddWithValue("@TIME_POSTED", time);
 
                     sqlCommand.ExecuteNonQuery();
                     sqlConnection.Close();
@@ -168,23 +165,6 @@ namespace LoginSystemASP.NET
             }
         }
 
-        public void UpdateProfileImage(byte[] bytes, User user, double size, string name, string type, DateTime time)
-        {
-
-            using (SqlConnection sqlConnection = new SqlConnection())
-            {
-                sqlConnection.ConnectionString = "Data Source=DESKTOP-DV7E1D5\\SQLEXPRESS;Initial Catalog=DataBaseSystem;Integrated Security=True";
-                sqlConnection.Open();
-
-                using(SqlCommand sqlCommand = new SqlCommand())
-                {              
-                    sqlCommand.Connection = sqlConnection;
-                    sqlCommand.CommandText = "UPDATE PROFILEIMAGE SET PROFILE_IMAGE = @PROFILE_IMAGE, IMAGE_SIZE = '" +  Math.Round(size / 1000000, 2).ToString() + " MB', IMAGE_NAME = '" + name + "', IMAGE_TYPE = '" + type + "', TIME_POSTED = '" + time + "' WHERE USERNAME='" + user.Username + "'";
-                    sqlCommand.Parameters.AddWithValue("@PROFILE_IMAGE", bytes);
-                    sqlCommand.ExecuteNonQuery();
-                    sqlConnection.Close();
-                }
-            }
-        }
+        //public bool UpdateProfileImage(byte[]by)
     }
 }

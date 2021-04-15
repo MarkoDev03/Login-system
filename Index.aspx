@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Create Account</title>
-    <link href="style3.css" rel="stylesheet" />
+    <link href="style1.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server" autocomplete="off">
