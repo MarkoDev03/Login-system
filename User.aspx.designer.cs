@@ -33,15 +33,6 @@ namespace LoginSystemASP.NET
         protected global::System.Web.UI.WebControls.Image logo;
 
         /// <summary>
-        /// HyperLink2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink2;
-
-        /// <summary>
         /// logOut control.
         /// </summary>
         /// <remarks>
@@ -112,5 +103,14 @@ namespace LoginSystemASP.NET
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label2;
+
+        /// <summary>
+        /// btnDeleteAccpount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDeleteAccpount;
     }
 }

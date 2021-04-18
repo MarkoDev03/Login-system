@@ -59,7 +59,7 @@ namespace LoginSystemASP.NET
                     else
 
                     {
-                        //lblProgress.Text = dataProvider.ErrorMessage;
+                        lblProgress.Text = dataProvider.ErrorMessage;
                     }
                 }
                 else
