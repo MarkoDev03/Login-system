@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Log in</title>
-    <link href="style3.css" rel="stylesheet" />
+    <link href="style4.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server" autocomplete="off">
@@ -16,8 +16,7 @@
                     <p>Marko Perović</p>
                 </div>
                 <div>
-                    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Index.aspx" CssClass="link">Home</asp:HyperLink>
-                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Index.aspx" CssClass="link">Create account</asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Default.aspx" CssClass="link">Home</asp:HyperLink>            
                 </div>
             </header>
             <section class="section" id="section">
@@ -33,10 +32,10 @@
                         <asp:Label ID="Label2" runat="server" Text="Password" CssClass="label-name"></asp:Label>
                         <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="text-box"></asp:TextBox>
                     </div>
-
-
                     <asp:Button ID="Button1" runat="server" OnClick="btnCreateAccount_Click" Text="Log in" CssClass="button-submit" />
-                    <asp:Label ID="lblProgress" runat="server" Text="" CssClass="error-label"></asp:Label>
+                    <asp:Button ID="Button2" runat="server" Text="Reset password" onclick="Button2_Click" CssClass="forgot-password"/>
+                    <asp:Label ID="lblProgress" runat="server" Text="" CssClass="a" ForeColor="Red"></asp:Label>
+                    <asp:Label ID="Label3" runat="server" Text="" ForeColor="Red"></asp:Label>
                 </div>
             </section>
         </div>

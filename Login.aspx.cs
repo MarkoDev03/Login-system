@@ -9,14 +9,15 @@ namespace LoginSystemASP.NET
 {
     public partial class Login : System.Web.UI.Page
     {
+        DataProvider dataProvider;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            dataProvider = new DataProvider();
         }
 
         protected void btnCreateAccount_Click(object sender, EventArgs e)
         {
-            DataProvider dataProvider = new DataProvider();
+            
             dataProvider.LogIn(txtUsername.Text, txtPassword.Text);
 
             if(dataProvider.LoginProgress == 1)
@@ -29,6 +30,13 @@ namespace LoginSystemASP.NET
             {
                 lblProgress.Text = "Wrong password or username!";
             }
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            dataProvider.ResetPassword(txtUsername.Text);
+            Label3.Text = dataProvider.UserEmail;
+
         }
     }
 }

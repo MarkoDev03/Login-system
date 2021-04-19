@@ -12,5 +12,6 @@ namespace LoginSystemASP.NET
         public string Biography { get; set; }
         public string Password { get; set; }
         public string Gender { get; set; }
+        public string Email { get; set; }
     }
 }

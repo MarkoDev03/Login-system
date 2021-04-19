@@ -72,10 +72,10 @@
     <Content Include="Images\MarkoLogo2.png" />
     <Content Include="Images\ocean.jpg" />
     <Content Include="Images\ocean2.jpg" />
-    <Content Include="Index.aspx" />
+    <Content Include="Default.aspx" />
     <Content Include="JavaScript1.js" />
     <Content Include="Login.aspx" />
-    <Content Include="style3.css" />
+    <Content Include="style4.css" />
     <Content Include="User.aspx" />
     <Content Include="UserJS.js" />
     <Content Include="Web.config" />
@@ -85,12 +85,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Index.aspx.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Index.aspx.designer.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

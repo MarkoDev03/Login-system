@@ -21,6 +21,7 @@ namespace LoginSystemASP.NET
 
             lblBiography.Text = user.Biography;
             lblUsername.Text = user.Username;
+            Label3.Text = user.Email;
 
             using (SqlConnection sqlConnection = new SqlConnection())
             {
@@ -71,7 +72,7 @@ namespace LoginSystemASP.NET
 
                 DataProvider dataProvider = new DataProvider();
 
-                SqlConnection sqlConnection = new SqlConnection("Data Source=DESKTOP-DV7E1D5\\SQLEXPRESS;Initial Catalog=LOGINSYSTEM;Integrated Security=True");
+                SqlConnection sqlConnection = new SqlConnection("Server=DESKTOP-DV7E1D5\\SQLEXPRESS;database=LOGINSYSTEM;Trusted_Connection=True");
                 SqlCommand sqlCommand2 = new SqlCommand("SELECT PROFILE_IMAGE FROM PROFILEIMAGE WHERE USERNAME='" + user.Username + "'", sqlConnection);
                 sqlConnection.Open();
 

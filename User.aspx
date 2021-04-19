@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>User</title>
-    <link href="style3.css" rel="stylesheet" />
+    <link href="style4.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -31,6 +31,7 @@
 
 
                 <asp:Label ID="lblBiography" runat="server" Text="" CssClass="user-biography"></asp:Label>
+                   <asp:Label ID="Label3" runat="server" Text="" CssClass="user-biography"></asp:Label>
                 <asp:Button ID="btnOpenImage" runat="server" Text="Post" OnClick="btnOpenImage_Click" CssClass="button-option" />
               
                 <label class="button-option label-style">
