@@ -34,8 +34,21 @@ namespace LoginSystemASP.NET
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            dataProvider.ResetPassword(txtUsername.Text);
-            Label3.Text = dataProvider.UserEmail;
+            if (!string.IsNullOrWhiteSpace(txtUsername.Text))
+            {
+                Random rnd = new Random();
+                Session["code"] = rnd.Next(1000, 9999).ToString();
+                dataProvider.ResetPassword(txtUsername.Text, Session["code"].ToString());
+                Label3.Text = dataProvider.UserEmail;
+
+                Session["username"] = txtUsername.Text;
+
+                Response.Redirect("ResetPassword.aspx");
+            }
+            else
+            {
+                lblProgress.Text = "Enter your username!";
+            }
 
         }
     }

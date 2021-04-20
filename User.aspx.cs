@@ -52,7 +52,7 @@ namespace LoginSystemASP.NET
         protected void logOut_Click(object sender, EventArgs e)
         {
             Session["user"] = null;
-            Response.Redirect("Index.aspx");
+            Response.Redirect("Default.aspx");
         }
 
         protected void btnOpenImage_Click(object sender, EventArgs e)
@@ -100,7 +100,7 @@ namespace LoginSystemASP.NET
             DataProvider dataProvider = new DataProvider();
             dataProvider.DeleteAccount(user1.Username);
             Label1.Text = dataProvider.ErrorMessage;
-            Response.Redirect("Index.aspx");
+            Response.Redirect("Default.aspx");
         }
 
     }

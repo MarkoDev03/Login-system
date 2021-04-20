@@ -9,12 +9,13 @@ namespace LoginSystemASP.NET
     public class DataProvider
     {
         public string ErrorMessage { get; set; }
+        public string UserEmail { get; set; }
+        public string ResetPasswordCode;
+
         public int LoginProgress = 0;
         public int CreatingProgress = 0;
-        public int ExistingAccount = 0;
         private string dataBaseConnectionString = "Data Source=DESKTOP-DV7E1D5\\SQLEXPRESS;Initial Catalog=LOGINSYSTEM;Integrated Security=True";
-        public string _userEMAIL;
-        public string UserEmail { get; set; }
+
 
         public bool CreateAccount(string username, string password, string biography, string gender, string email)
         {
@@ -93,23 +94,28 @@ namespace LoginSystemASP.NET
 
                             SqlDataReader sqlDataReader = null;
 
-                            SqlCommand sqlCommandFoBiography = new SqlCommand("SELECT * FROM ACCOUNTS_ WHERE USERNAME='" + username + "' AND PASSWORD='" + password + "'", sqlConnection);
-                            sqlCommandFoBiography.ExecuteNonQuery();
-                            sqlDataReader = sqlCommandFoBiography.ExecuteReader();
-
-                            while (sqlDataReader.Read())
+                            using (SqlCommand sqlCommandFoBiography = new SqlCommand())
                             {
-                                user.Biography = sqlDataReader["BIOGRAPHY"].ToString();
-                                user.Email = sqlDataReader["EMAIL"].ToString();
-                            }
+                                sqlCommandFoBiography.Connection = sqlConnection;
+                                sqlCommandFoBiography.CommandText = "SELECT * FROM ACCOUNTS_ WHERE USERNAME='" + username + "' AND PASSWORD='" + password + "'";
+                                sqlCommandFoBiography.ExecuteNonQuery();
+                                sqlDataReader = sqlCommandFoBiography.ExecuteReader();
 
-                            return user;
+                                while (sqlDataReader.Read())
+                                {
+                                    user.Biography = sqlDataReader["BIOGRAPHY"].ToString();
+                                    user.Email = sqlDataReader["EMAIL"].ToString();
+                                }
+
+                                return user;
+                            }
                         }
                         else
                         {
                             LoginProgress = 0;
                             return null;
                         }
+                                                 
                     }
                 }
             }
@@ -127,18 +133,24 @@ namespace LoginSystemASP.NET
                 sqlConnection.ConnectionString = dataBaseConnectionString;
                 sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand("SELECT * FROM ACCOUNTS_ WHERE USERNAME = @USERNAME", sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@USERNAME", username);
-                SqlDataReader reader = null;
-                reader = sqlCommand.ExecuteReader();
+                using (SqlCommand sqlCommand = new SqlCommand())
+                {
+                    sqlCommand.Connection = sqlConnection;
+                    sqlCommand.CommandText = "SELECT * FROM ACCOUNTS_ WHERE USERNAME = @USERNAME";
+                    sqlCommand.Parameters.AddWithValue("@USERNAME", username);
 
-                if (reader != null && reader.HasRows)
-                {
-                    return 1;
-                }
-                else
-                {
-                    return 0;
+                    SqlDataReader reader = null;
+                    reader = sqlCommand.ExecuteReader();
+
+                    if (reader != null && reader.HasRows)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+
                 }
             }
         }
@@ -214,7 +226,7 @@ namespace LoginSystemASP.NET
             }
         }
 
-        public void ResetPassword(string username)
+        public void ResetPassword(string username,string code)
         {
 
             try
@@ -226,7 +238,7 @@ namespace LoginSystemASP.NET
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.Connection = sqlConnection;
-                        cmd.CommandText = "SELECT * FROM ACCOUNTS_ WHERE USERNAME='"+username+"'";
+                        cmd.CommandText = "SELECT * FROM ACCOUNTS_ WHERE USERNAME='" + username + "'";
 
                         SqlDataReader reader = null;
                         reader = cmd.ExecuteReader();
@@ -235,17 +247,24 @@ namespace LoginSystemASP.NET
                         {
                             Random rnd = new Random();
                             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+
                             client.EnableSsl = true;
                             client.DeliveryMethod = SmtpDeliveryMethod.Network;
                             client.UseDefaultCredentials = false;
-                            client.Credentials = new NetworkCredential("mmarko.perovici3@gmail.com", "***");
+                            client.Credentials = new NetworkCredential("mmarko.perovici3@gmail.com", "****");
+
                             MailMessage msg = new MailMessage();
+
+                            ResetPasswordCode = rnd.Next(1000, 9999).ToString();
+
                             msg.To.Add(reader["EMAIL"].ToString());
                             msg.From = new MailAddress("mmarko.perovici3@gmail.com");
                             msg.Subject = "Reset password";
-                            msg.Body = "Your code is " + rnd.Next(1000, 9999).ToString();
+                            msg.Body = "Your code is " + code;
+
                             client.Send(msg);
-        
+
+                            
                         }
 
                     }
@@ -256,5 +275,38 @@ namespace LoginSystemASP.NET
                 Console.WriteLine(ex.Message);
             }
         }
+
+        public void ChangePassword(string username, string newPassword)
+        {
+            try
+            {
+                if (newPassword.Length > 6)
+                {
+
+                    using (SqlConnection sqlConnection = new SqlConnection())
+                    {
+                        sqlConnection.ConnectionString = dataBaseConnectionString;
+                        sqlConnection.Open();
+
+                        using (SqlCommand sqlCommand = new SqlCommand())
+                        {
+                            sqlCommand.Connection = sqlConnection;
+                            sqlCommand.CommandText = "UPDATE ACCOUNTS_ SET PASSWORD = '" + newPassword + "' WHERE USERNAME = '" + username + "'";
+                            sqlCommand.ExecuteNonQuery();
+                        }
+                    }
+                }
+                else
+                {
+                    ErrorMessage = "Password must be longer then 6 characters!";
+                }
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
+        }
+
+
     }
 }
