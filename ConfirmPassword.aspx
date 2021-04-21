@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ResetPassword.aspx.cs" Inherits="LoginSystemASP.NET.ResetPassword" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ConfirmPassword.aspx.cs" Inherits="LoginSystemASP.NET.ConfirmPassword" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Reset password</title>
+    <title>Confirm password</title>
     <link href="style5.css" rel="stylesheet" />
 </head>
 <body>
@@ -25,14 +25,14 @@
                 <div class="black-wrapper" id="wrapper-img"></div>
                 <div class="black-wrapper-black" id="wrapper-img-2"></div>
                 <div class="form">
-                    <h1 class="headline">Reset password</h1>
+                    <h1 class="headline">Confirm password</h1>
 
                     <div class="block">
-                        <asp:Label ID="Label6" runat="server" Text="Enter code" CssClass="label-name"></asp:Label>
-                        <asp:TextBox ID="txtCode" runat="server" CssClass="text-box"></asp:TextBox>
+                        <asp:Label ID="Label6" runat="server" Text="Password" CssClass="label-name"></asp:Label>
+                        <asp:TextBox ID="txtPassword" runat="server" CssClass="text-box"></asp:TextBox>
                     </div>
 
-                    <asp:Button ID="btnResetPassword" runat="server" Text="Reset" CssClass="button-submit" OnClick="btnResetPassword_Click" />
+                    <asp:Button ID="btnCheckPasswod" runat="server" Text="Apply" CssClass="button-submit" OnClick="btnCheckPasswod_Click"/>
                     <asp:Label ID="lblProgress" runat="server" Text="" CssClass="error-label"></asp:Label>
                 </div>
             </section>

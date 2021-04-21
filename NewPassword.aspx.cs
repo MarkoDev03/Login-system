@@ -19,17 +19,24 @@ namespace LoginSystemASP.NET
             DataProvider dataProvider = new DataProvider();
             dataProvider.ChangePassword(Session["username"].ToString(), txtPassword.Text);
             lblProgress.Text = dataProvider.ErrorMessage;
-            dataProvider.LogIn(Session["username"].ToString(), txtPassword.Text);
-
-            if (dataProvider.LoginProgress == 1)
+            if (txtPassword.Text.Length > 6)
             {
-                lblProgress.Text = "Logged in!";
-                Session["user"] = dataProvider.LogIn(Session["username"].ToString(), txtPassword.Text);
-                Response.Redirect("User.aspx");
+                dataProvider.LogIn(Session["username"].ToString(), txtPassword.Text);
+
+                if (dataProvider.LoginProgress == 1)
+                {
+                    lblProgress.Text = "Logged in!";
+                    Session["user"] = dataProvider.LogIn(Session["username"].ToString(), txtPassword.Text);
+                    Response.Redirect("User.aspx");
+                }
+                else
+                {
+                    lblProgress.Text = "Wrong password or username!";
+                }
             }
             else
             {
-                lblProgress.Text = "Wrong password or username!";
+                lblProgress.Text = "Password must be longer then 6 characters!";
             }
         }
     }

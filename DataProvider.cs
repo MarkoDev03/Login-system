@@ -11,10 +11,9 @@ namespace LoginSystemASP.NET
         public string ErrorMessage { get; set; }
         public string UserEmail { get; set; }
         public string ResetPasswordCode;
-
-        public int LoginProgress = 0;
-        public int CreatingProgress = 0;
-        private string dataBaseConnectionString = "Data Source=DESKTOP-DV7E1D5\\SQLEXPRESS;Initial Catalog=LOGINSYSTEM;Integrated Security=True";
+        public bool _isPasswordChecked = false;
+        public int LoginProgress = 0, CreatingProgress = 0;
+        private string dataBaseConnectionString = "workstation id=LOGINSYSTEMMARKO.mssql.somee.com;packet size=4096;user id=perovicmarko123_SQLLogin_1;pwd=yuxkh8vxl2;data source=LOGINSYSTEMMARKO.mssql.somee.com;persist security info=False;initial catalog=LOGINSYSTEMMARKO";
 
 
         public bool CreateAccount(string username, string password, string biography, string gender, string email)
@@ -245,25 +244,34 @@ namespace LoginSystemASP.NET
 
                         while (reader.Read())
                         {
-                            Random rnd = new Random();
-                            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
 
-                            client.EnableSsl = true;
-                            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                            client.UseDefaultCredentials = false;
-                            client.Credentials = new NetworkCredential("mmarko.perovici3@gmail.com", "****");
+                            try
+                            {
 
-                            MailMessage msg = new MailMessage();
+                                Random rnd = new Random();
+                                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
 
-                            ResetPasswordCode = rnd.Next(1000, 9999).ToString();
+                                client.EnableSsl = true;
+                                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                                client.UseDefaultCredentials = false;
+                                client.Credentials = new NetworkCredential("mmarko.perovici3@gmail.com", "-");
 
-                            msg.To.Add(reader["EMAIL"].ToString());
-                            msg.From = new MailAddress("mmarko.perovici3@gmail.com");
-                            msg.Subject = "Reset password";
-                            msg.Body = "Your code is " + code;
+                                MailMessage msg = new MailMessage();
 
-                            client.Send(msg);
+                                ResetPasswordCode = rnd.Next(1000, 9999).ToString();
 
+                                msg.To.Add(reader["EMAIL"].ToString());
+                                msg.From = new MailAddress("mmarko.perovici3@gmail.com");
+                                msg.Subject = "Reset password";
+                                msg.Body = "Your code is " + code;
+
+                                client.Send(msg);
+
+                            }
+                            catch(Exception ex)
+                            {
+                                ErrorMessage = ex.Message;
+                            }
                             
                         }
 
@@ -306,7 +314,72 @@ namespace LoginSystemASP.NET
                 ErrorMessage = ex.Message;
             }
         }
+        
+        public void CheckPreviousPasswordValidation(string username, string enterendPassword)
+        {
+            try
+            {
 
+                using(SqlConnection sqlConnection = new SqlConnection())
+                {
+                    sqlConnection.ConnectionString = dataBaseConnectionString;
+                    sqlConnection.Open();
+
+                    using(SqlCommand sqlCommand = new SqlCommand())
+                    {
+                        sqlCommand.Connection = sqlConnection;
+                        sqlCommand.CommandText = "SELECT * FROM ACCOUNTS_ WHERE USERNAME = '"+ username + "'";
+
+                        SqlDataReader dataReader = null;
+
+                        dataReader = sqlCommand.ExecuteReader();
+
+                        while (dataReader.Read())
+                        {
+                            if (enterendPassword == dataReader["PASSWORD"].ToString())
+                            {
+                                _isPasswordChecked = true;
+                            }
+                            else
+                            {
+                                _isPasswordChecked = false;
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
+        }
+
+        public void UpdateBiography(string username, string newBiography)
+        {
+
+            try
+            {
+
+                using(SqlConnection sqlConnection = new SqlConnection())
+                {
+                    sqlConnection.ConnectionString = dataBaseConnectionString;
+                    sqlConnection.Open();
+
+                    using(SqlCommand sqlCommand = new SqlCommand())
+                    {
+                        sqlCommand.Connection = sqlConnection;
+                        sqlCommand.CommandText = "UPDATE ACCOUNTS_ SET BIOGRAPHY = '" + newBiography + "' WHERE USERNAME = '" + username + "'";
+                    }
+
+                }
+
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
+        }
 
     }
 }

@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ConfirmPassword.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\MarkoLogo.png" />
     <Content Include="Images\MarkoLogo2.png" />
@@ -77,12 +78,20 @@
     <Content Include="Login.aspx" />
     <Content Include="NewPassword.aspx" />
     <Content Include="ResetPassword.aspx" />
-    <Content Include="style4.css" />
+    <Content Include="style5.css" />
+    <Content Include="style6.css" />
     <Content Include="User.aspx" />
     <Content Include="UserJS.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfirmPassword.aspx.cs">
+      <DependentUpon>ConfirmPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConfirmPassword.aspx.designer.cs">
+      <DependentUpon>ConfirmPassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DataProvider.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

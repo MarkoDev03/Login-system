@@ -7,27 +7,25 @@ using System.Web.UI.WebControls;
 
 namespace LoginSystemASP.NET
 {
-    public partial class ResetPassword : System.Web.UI.Page
+    public partial class ConfirmPassword : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
-           // lblProgress.Text = Session["username"].ToString();
-            DataProvider dataProvider = new DataProvider();
-            lblProgress.Text = dataProvider.ResetPasswordCode;
-
         }
 
-        protected void btnResetPassword_Click(object sender, EventArgs e)
+        protected void btnCheckPasswod_Click(object sender, EventArgs e)
         {
             DataProvider dataProvider = new DataProvider();
-            if(txtCode.Text.Trim() == Session["code"].ToString())
+            dataProvider.CheckPreviousPasswordValidation(Session["username"].ToString(), txtPassword.Text);
+
+            if(dataProvider._isPasswordChecked == true)
             {
                 Response.Redirect("NewPassword.aspx");
             }
             else
             {
-                lblProgress.Text = "Wrong code!";
+                lblProgress.Text = "Wrong password!";
             }
         }
     }

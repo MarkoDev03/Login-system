@@ -13,6 +13,7 @@ namespace LoginSystemASP.NET
         protected void Page_Load(object sender, EventArgs e)
         {
             dataProvider = new DataProvider();
+            Label3.Text = dataProvider.ErrorMessage;
         }
 
         protected void btnCreateAccount_Click(object sender, EventArgs e)
@@ -39,11 +40,15 @@ namespace LoginSystemASP.NET
                 Random rnd = new Random();
                 Session["code"] = rnd.Next(1000, 9999).ToString();
                 dataProvider.ResetPassword(txtUsername.Text, Session["code"].ToString());
-                Label3.Text = dataProvider.UserEmail;
+                Label3.Text = dataProvider.ErrorMessage;
+
+                if(Label3.Text != "The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.7.0 Authentication Required. Learn more at")
+                {
+                    Response.Redirect("ResetPassword.aspx");
+                }
 
                 Session["username"] = txtUsername.Text;
 
-                Response.Redirect("ResetPassword.aspx");
             }
             else
             {

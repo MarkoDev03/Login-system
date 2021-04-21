@@ -18,14 +18,15 @@ namespace LoginSystemASP.NET
         protected void Page_Load(object sender, EventArgs e)
         {
             user = Session["user"] as User;
+            Session["username"] = user.Username;
 
             lblBiography.Text = user.Biography;
             lblUsername.Text = user.Username;
-            Label3.Text = user.Email;
+            lblEmail.Text = user.Email;
 
             using (SqlConnection sqlConnection = new SqlConnection())
             {
-                sqlConnection.ConnectionString = "Data Source=DESKTOP-DV7E1D5\\SQLEXPRESS;Initial Catalog=LOGINSYSTEM;Integrated Security=True";
+                sqlConnection.ConnectionString = "workstation id=LOGINSYSTEMMARKO.mssql.somee.com;packet size=4096;user id=perovicmarko123_SQLLogin_1;pwd=yuxkh8vxl2;data source=LOGINSYSTEMMARKO.mssql.somee.com;persist security info=False;initial catalog=LOGINSYSTEMMARKO";
                 sqlConnection.Open();
                 using (SqlCommand sqlCommand = new SqlCommand())
                 {
@@ -44,6 +45,7 @@ namespace LoginSystemASP.NET
                     {
 
                         btnOpenImage.Text = "Post";
+ 
                     }
                 }
             }
@@ -72,7 +74,7 @@ namespace LoginSystemASP.NET
 
                 DataProvider dataProvider = new DataProvider();
 
-                SqlConnection sqlConnection = new SqlConnection("Server=DESKTOP-DV7E1D5\\SQLEXPRESS;database=LOGINSYSTEM;Trusted_Connection=True");
+                SqlConnection sqlConnection = new SqlConnection("workstation id=LOGINSYSTEMMARKO.mssql.somee.com;packet size=4096;user id=perovicmarko123_SQLLogin_1;pwd=yuxkh8vxl2;data source=LOGINSYSTEMMARKO.mssql.somee.com;persist security info=False;initial catalog=LOGINSYSTEMMARKO");
                 SqlCommand sqlCommand2 = new SqlCommand("SELECT PROFILE_IMAGE FROM PROFILEIMAGE WHERE USERNAME='" + user.Username + "'", sqlConnection);
                 sqlConnection.Open();
 
@@ -103,5 +105,9 @@ namespace LoginSystemASP.NET
             Response.Redirect("Default.aspx");
         }
 
+        protected void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ConfirmPassword.aspx");
+        }
     }
 }

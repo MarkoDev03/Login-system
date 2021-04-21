@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Create Account</title>
-    <link href="style4.css" rel="stylesheet" />
+    <link href="style5.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server" autocomplete="off">
@@ -16,7 +16,7 @@
                     <p>Marko Perović</p>
                 </div>
                 <div>
-                    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Index.aspx" CssClass="link">Home</asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Default.aspx" CssClass="link">Home</asp:HyperLink>
                     <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Login.aspx" CssClass="link">Log in</asp:HyperLink>
 
                 </div>
